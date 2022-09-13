@@ -1,0 +1,208 @@
+{
+  "root": true,
+  "ignorePatterns": [],
+  "plugins": [],
+  "overrides": [
+    {
+      /**
+       * -----------------------------------------------------
+       * TYPESCRIPT FILES (COMPONENTS, SERVICES ETC) (.ts)
+       * -----------------------------------------------------
+       */
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.app.json",
+          "tsconfig.spec.json",
+          "e2e/tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        // This is required when we use inline templates in Components
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        /**
+         * Any TypeScript source code (NOT TEMPLATE) related rules we wish to use/reconfigure over and above the
+         * recommended set provided by the @angular-eslint project go here.
+         */
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": [
+              "enumMember"
+            ],
+            "format": [
+              "camelCase",
+              "UPPER_CASE"
+            ]
+          }
+        ],
+        "@typescript-eslint/quotes": [
+          "error",
+          "single",
+          {
+            "allowTemplateLiterals": true
+          }
+        ]
+      }
+    },
+    // See https://github.com/gajus/eslint-plugin-jsdoc#configuration
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:jsdoc/recommended"
+      ],
+      "plugins": [
+        "jsdoc"
+      ]
+    },
+    /**
+     * -----------------------------------------------------
+     * COMPONENT TEMPLATES
+     * -----------------------------------------------------
+     */
+    // See https://github.com/BenoitZugmeyer/eslint-plugin-html#settings
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "plugins": [
+        "html"
+      ],
+      "rules": {},
+      "settings": {
+        "html": {
+          // Consider only .html files as HTML
+          // See https://github.com/BenoitZugmeyer/eslint-plugin-html#htmlhtml-extensions
+          "html-extensions": [
+            ".html"
+          ],
+          // Indentation is the <script> indentation plus two spaces
+          // See https://github.com/BenoitZugmeyer/eslint-plugin-html#htmlindent
+          "indent": "+2",
+          // Show warning if a problematic indentation is encountered (ex: a line is under indented)
+          // See https://github.com/BenoitZugmeyer/eslint-plugin-html#htmlreport-bad-indent
+          "report-bad-indent": "warn"
+        }
+      }
+    },
+    // See https://github.com/azeemba/eslint-plugin-json#basic-configuration
+    {
+      "files": [
+        "*.json"
+      ],
+      "extends": [
+        "plugin:json/recommended-with-comments"
+      ],
+      "plugins": [
+        "json"
+      ]
+    },
+    // See https://www.npmjs.com/package/eslint-plugin-md#usage-with-eslint-plugin-prettier
+    {
+      "files": [
+        "*.md"
+      ],
+      "extends": [
+        "plugin:prettier/recommended",
+        "plugin:md/recommended"
+      ],
+      "parser": "markdown-eslint-parser",
+      "rules": {
+        "md/remark": "warn",
+        "prettier/prettier": [
+          "error",
+          // Important to force prettier to use "markdown" parser - otherwise it wouldn't be able to parse *.md files.
+          // You also can configure other options supported by prettier here - "prose-wrap" is particularly useful for
+          // *.md files
+          {
+            "parser": "markdown"
+          }
+        ]
+      }
+    },
+    // See https://github.com/timdeschryver/eslint-plugin-ngrx#manual
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:ngrx/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaVersion": 2019,
+        "project": "./tsconfig.json",
+        "sourceType": "module"
+      },
+      "plugins": [
+        "ngrx"
+      ]
+    },
+    // See https://github.com/TristonJ/eslint-plugin-prefer-arrow#installation
+    {
+      "files": [
+        "*.ts"
+      ],
+      "plugins": [
+        "prefer-arrow"
+      ],
+      "rules": {
+        "prefer-arrow/prefer-arrow-functions": [
+          "warn",
+          {
+            "disallowPrototype": true,
+            "singleReturnOnly": false,
+            "classPropertiesAllowed": false
+          }
+        ]
+      }
+    },
+    // See https://github.com/sindresorhus/eslint-plugin-unicorn#recommended-config
+    {
+      "files": [
+        "*.ts"
+      ],
+      "plugins": [
+        "unicorn"
+      ],
+      "extends": [
+        "plugin:unicorn/recommended"
+      ]
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:prettier/recommended"
+      ]
+    }
+  ]
+}

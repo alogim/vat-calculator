@@ -1,3 +1,78 @@
-<h1>Hello world!</h1>
+<mat-toolbar color="primary">
+  <span>Vat Calculator</span>
+</mat-toolbar>
 
-<span class="something">The component seems to be working!</span>
+<form (ngSubmit)="compute()" [formGroup]="myForm">
+  <div class="radio-group-container">
+    <label id="vat-rate-radio-group-label">VAT rate</label>
+    <mat-radio-group
+      aria-labelledby="vat-rate-radio-group-label"
+      class="vat-rate-radio-group"
+      formControlName="selectedVATRate"
+    >
+      <mat-radio-button
+        *ngFor="let vatRate of vatRates"
+        [value]="vatRate"
+        class="vat-rate-radio-button"
+      >
+        {{ vatRate | percent }}
+      </mat-radio-button>
+      <mat-error
+        *ngIf="selectedVATRateControl.hasError('required')"
+        class="error-container"
+      >
+        {{ "errors.noSelection" | translate }}
+      </mat-error>
+    </mat-radio-group>
+  </div>
+
+  <ng-container formGroupName="amountsGroup">
+    <mat-form-field
+      *ngFor="let field of AmountsFieldsEnum | keyvalue"
+      appearance="fill"
+    >
+      <mat-label>{{ field.value | translate }}</mat-label>
+      <input
+        (keyup)="resetOtherAmounts(field.value)"
+        [formControlName]="field.value"
+        [placeholder]="
+          'placeholders.enter' + (field.value | capitaliseFirstLetter)
+            | translate
+        "
+        matInput
+        type="text"
+      />
+      <mat-error
+        *ngIf="
+          amountsGroup
+            .get(field.value)
+            ?.hasError(ErrorCodeEnum.NOT_A_VALID_NUMBER)
+        "
+      >
+        {{ "errors." + ErrorCodeEnum.NOT_A_VALID_NUMBER | translate }}
+      </mat-error>
+    </mat-form-field>
+  </ng-container>
+
+  <div class="error-container">
+    <mat-error
+      *ngFor="let error of amountsGroup.errors | keyvalue"
+      class="form-group-error"
+    >
+      {{ "errors." + error.key | translate }}
+    </mat-error>
+  </div>
+
+  <div class="buttons-container">
+    <button
+      [disabled]="myForm.invalid"
+      color="primary"
+      mat-raised-button
+      type="submit"
+    >
+      Compute
+    </button>
+
+    <button mat-flat-button type="reset">Reset</button>
+  </div>
+</form>

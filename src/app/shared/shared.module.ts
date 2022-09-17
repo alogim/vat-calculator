@@ -12,6 +12,7 @@ import { MaterialComponentsModule } from './material-components/material-compone
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
+import { CapitaliseFirstLetterPipe } from './pipes/capitalise-first-letter.pipe';
 
 export const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader => {
   return new TranslateHttpLoader(http);
@@ -40,9 +41,11 @@ export const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader => {
     ReactiveFormsModule,
     TranslateModule,
     MaterialComponentsModule,
+    CapitaliseFirstLetterPipe,
   ],
   providers: [HttpClientModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  declarations: [CapitaliseFirstLetterPipe],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {

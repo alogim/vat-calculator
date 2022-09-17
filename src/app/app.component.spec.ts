@@ -84,10 +84,10 @@ describe('AppComponent', () => {
       expect(amountsFields.length).toBe(3);
 
       const fieldsLabels: DebugElement[] = fixture.debugElement.queryAll(
-        By.css('mat-form-field > label'),
+        By.css('mat-form-field > mat-label'),
       );
-      expect(amountsFields).toBeTruthy();
-      expect(amountsFields.length).toBe(3);
+      expect(fieldsLabels).toBeTruthy();
+      expect(fieldsLabels.length).toBe(3);
     });
 
     it('should render the errors container', () => {
@@ -106,6 +106,19 @@ describe('AppComponent', () => {
       const buttons = buttonsContainer[0].queryAll(By.css('button'));
       expect(buttons).toBeTruthy();
       expect(buttons.length).toBe(2);
+    });
+  });
+
+  describe('validation', () => {
+    it('should show error "Please select a value" under the VAT rate selector', () => {
+      const errorContainer: DebugElement[] = fixture.debugElement.queryAll(
+        By.css('mat-error.error-container'),
+      );
+
+      expect(errorContainer).toBeTruthy();
+      expect(
+        (errorContainer[0].nativeElement as HTMLElement)?.textContent?.trim(),
+      ).toBe('errors.noSelection');
     });
   });
 });

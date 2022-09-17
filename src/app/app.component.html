@@ -29,6 +29,7 @@
   <ng-container formGroupName="amountsGroup">
     <mat-form-field
       *ngFor="let field of AmountsFieldsEnum | keyvalue"
+      [class]="field.value"
       appearance="fill"
     >
       <mat-label>{{ field.value | translate }}</mat-label>

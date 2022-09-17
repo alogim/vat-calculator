@@ -14,9 +14,14 @@ import { isStringAsNumberInvalid } from '../shared/helper';
 })
 export class CalculatorService {
   /**
-   * Returns
+   * Simulate an API call (in the backend we should make sure the input is a
+   * valid number different from zero, because even though the input is
+   * validated in the frontend, the API call might be called directly by another s
+   * ervice which does not perform validation/sanitisation).
    *
-   * @param formValue
+   * @param {FormInterface} formValue the submitted form
+   * @returns {Observable<FormInterfaceReply>} an Observable containing the
+   * errors or the computed amounts
    */
   getResult(formValue: FormInterface): Observable<FormInterfaceReply> {
     const formErrors: Map<keyof FormInterface, ErrorCodeEnum> | undefined =
@@ -31,16 +36,11 @@ export class CalculatorService {
     vatAmount = Number(formValue.amountsGroup.vatAmount);
     priceWithVAT = Number(formValue.amountsGroup.priceWithVAT);
 
-    // vatAmount = priceWithVAT - priceWithoutVAT;
-    // vatAmount = priceWithoutVAT * selectedVATRate;
-    // priceWithVAT - priceWithoutVAT = priceWithoutVAT * selectedVATRate
-    // priceWithoutVAT * (selectedVATRate + 1) = priceWithVAT
-    // priceWithoutVAT = priceWithVAT / (selectedVATRate + 1)
-
     let returnValue: FormInterfaceReply = {
       selectedVATRate: formValue.selectedVATRate,
     };
 
+    // Compute the amounts
     if (priceWithoutVAT) {
       vatAmount = priceWithoutVAT * selectedVATRate;
       priceWithVAT = vatAmount + priceWithoutVAT;
@@ -77,10 +77,6 @@ export class CalculatorService {
     }
 
     return of(returnValue);
-
-    // Simulate an API call (in the backend we should make sure the input is a valid number different from zero, because
-    // even though the input is validated in the frontend, the API call might be called directly by another service
-    // which does not perform validations/sanitization)
   }
 
   /**
@@ -99,6 +95,7 @@ export class CalculatorService {
     const errorCodes: Map<keyof FormInterface, ErrorCodeEnum> = new Map();
     let numberOfSpecifiedAmounts: number = 0;
 
+    // If no selected VAT rate is specified, set the appropriate error
     if (isStringAsNumberInvalid(formValue.selectedVATRate, true)) {
       errorCodes.set(
         SelectedVATRateEnum.SELECTED_VAT_RATE,
@@ -106,6 +103,8 @@ export class CalculatorService {
       );
     }
 
+    // Iterate over the amounts group fields and check how many amounts are
+    // correctly specified
     for (const key in formValue.amountsGroup) {
       if (
         !isStringAsNumberInvalid(
@@ -117,6 +116,7 @@ export class CalculatorService {
       }
     }
 
+    // If no amount or more than one amount is specified, set an error
     if (numberOfSpecifiedAmounts === 0) {
       errorCodes.set('amountsGroup', ErrorCodeEnum.NO_AMOUNT_SPECIFIED);
     } else if (numberOfSpecifiedAmounts > 1) {

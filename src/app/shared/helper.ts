@@ -6,7 +6,8 @@ import { ErrorCodeEnum } from './error-code.enum';
  * false otherwise.
  *
  * @param {string | null | undefined} stringValue the string value to be analysed
- * @param strictCheck
+ * @param {boolean} strictCheck whether to return true or false when the value
+ * is null/undefined/empty
  * @returns {boolean} true or false
  */
 export const isStringAsNumberInvalid = (
@@ -18,11 +19,8 @@ export const isStringAsNumberInvalid = (
     stringValue === undefined ||
     stringValue?.toString()?.trim().length === 0
   ) {
-    console.log('Field does not contain anything!');
     return strictCheck;
   }
-
-  console.log('Field control contains something!');
 
   const valueAsNumber: number = Number(stringValue);
   return Number.isNaN(valueAsNumber) || valueAsNumber === 0;

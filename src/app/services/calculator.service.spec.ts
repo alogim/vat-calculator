@@ -353,6 +353,3 @@ describe('CalculatorService', () => {
     });
   });
 });
-
-// TODO: add selenium tests
-// TODO: configure fixtures?

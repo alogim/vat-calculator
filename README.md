@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.
 
-It contains a basic Angular application which you can use to start implementing a new project.
+It contains a simple Angular application which can be used to compute the Value-Added Tax (VAT).
 
 ## Development server
 
@@ -24,8 +24,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a
-package that implements end-to-end testing capabilities.
+Run `npm run cy:run` to execute the end-to-end tests via cypress.
 
 ## Further help
 

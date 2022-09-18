@@ -71,9 +71,11 @@
       mat-raised-button
       type="submit"
     >
-      Compute
+      {{ "buttons.submit" | translate }}
     </button>
 
-    <button mat-flat-button type="reset">Reset</button>
+    <button mat-flat-button type="reset">
+      {{ "buttons.reset" | translate }}
+    </button>
   </div>
 </form>

@@ -1,17 +1,21 @@
 {
-  "priceWithVAT": "Price including VAT",
-  "priceWithoutVAT": "Price without VAT",
-  "vatAmount": "VAT amount",
-  "vatRate": "VAT rate",
-  "placeholders": {
-    "enterPriceWithVAT": "Enter price including VAT",
-    "enterPriceWithoutVAT": "Enter price without VAT",
-    "enterVatAmount": "Enter VAT amount"
+  "buttons": {
+    "submit": "Compute",
+    "reset": "Reset"
   },
   "errors": {
     "noAmountSpecified": "Please enter one amount",
     "tooManyAmountsSpecified": "Please enter only one amount",
     "notAValidNumber": "Please specify a valid number different from zero!",
     "noSelection": "Please select a value"
-  }
+  },
+  "placeholders": {
+    "enterPriceWithoutVAT": "Enter price without VAT",
+    "enterPriceWithVAT": "Enter price including VAT",
+    "enterVatAmount": "Enter VAT amount"
+  },
+  "priceWithVAT": "Price including VAT",
+  "priceWithoutVAT": "Price without VAT",
+  "vatAmount": "VAT amount",
+  "vatRate": "VAT rate"
 }

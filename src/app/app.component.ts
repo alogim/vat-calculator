@@ -84,8 +84,6 @@ export class AppComponent implements OnDestroy {
         (isStringAsNumberInvalid(this.vatAmountControl.value, true) ? 0 : 1) +
         (isStringAsNumberInvalid(this.priceWithVATControl.value, true) ? 0 : 1);
 
-      console.log('definedValues:', definedValues);
-
       if (definedValues === 0) {
         return { [ErrorCodeEnum.NO_AMOUNT_SPECIFIED]: true };
       } else if (definedValues > 1) {
